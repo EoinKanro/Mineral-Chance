@@ -1,9 +1,8 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.natamus.mineralchance.forge.mixin",
+  "package": "com.natamus.mineralchance.mixin",
   "compatibilityLevel": "JAVA_17",
-  "refmap": "mineralchance_forge.refmap.json",
   "mixins": [
 
   ],

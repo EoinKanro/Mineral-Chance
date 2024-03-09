@@ -3,7 +3,7 @@ package com.natamus.mineralchance.events;
 import com.natamus.collective.data.GlobalVariables;
 import com.natamus.collective.fakeplayer.FakePlayer;
 import com.natamus.collective.functions.CompareBlockFunctions;
-import com.natamus.collective.functions.StringFunctions;
+import com.natamus.collective.functions.MessageFunctions;
 import com.natamus.collective.functions.WorldFunctions;
 import com.natamus.collective.services.Services;
 import com.natamus.mineralchance.config.ConfigHandler;
@@ -87,7 +87,7 @@ public class MiningEvent {
 		world.addFreshEntity(mineralentity);
 		
 		if (ConfigHandler.sendMessageOnMineralFind) {
-			StringFunctions.sendMessage(player, ConfigHandler.foundMineralMessage, ChatFormatting.DARK_GREEN);
+			MessageFunctions.sendMessage(player, ConfigHandler.foundMineralMessage, ChatFormatting.DARK_GREEN);
 		}
 	}
 }
