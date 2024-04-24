@@ -10,6 +10,7 @@ import com.natamus.mineralchance.config.ConfigHandler;
 import com.natamus.mineralchance.util.Util;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -23,8 +24,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class MiningEvent {
-	public static void onBlockBreak(Level world, Player player, BlockPos pos, BlockState state, BlockEntity blockEntity) {
-		if (world.isClientSide) {
+	public static void onBlockBreak(Level level, Player player, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity) {
+		if (level.isClientSide) {
 			return;
 		}
 		
@@ -49,13 +50,13 @@ public class MiningEvent {
 			}
 		}
 		
-		Block block = state.getBlock();
+		Block block = blockState.getBlock();
 		if (!CompareBlockFunctions.isStoneBlock(block) && !CompareBlockFunctions.isNetherStoneBlock(block)) {
 			return;
 		}
 		
-		Item randommineral;
-		if (WorldFunctions.isOverworld(world)) {
+		Item randomMineralItem;
+		if (WorldFunctions.isOverworld(level)) {
 			if (!ConfigHandler.enableOverworldMinerals) {
 				return;
 			}
@@ -65,9 +66,9 @@ public class MiningEvent {
 			if (GlobalVariables.random.nextDouble() > ConfigHandler.extraMineralChanceOnOverworldStoneBreak) {
 				return;
 			}
-			randommineral = Util.getRandomOverworldMineral();
+			randomMineralItem = Util.getRandomOverworldMineral();
 		}
-		else if (WorldFunctions.isNether(world)) {
+		else if (WorldFunctions.isNether(level)) {
 			if (!ConfigHandler.enableNetherMinerals) {
 				return;
 			}
@@ -77,17 +78,19 @@ public class MiningEvent {
 			if (GlobalVariables.random.nextDouble() > ConfigHandler.extraMineralChanceOnNetherStoneBreak) {
 				return;
 			}
-			randommineral = Util.getRandomNetherMineral();
+			randomMineralItem = Util.getRandomNetherMineral();
 		}
 		else {
 			return;
 		}
 		
-		ItemEntity mineralentity = new ItemEntity(world, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, new ItemStack(randommineral, 1));
-		world.addFreshEntity(mineralentity);
+		ItemEntity mineralItemEntity = new ItemEntity(level, blockPos.getX()+0.5, blockPos.getY()+0.5, blockPos.getZ()+0.5, new ItemStack(randomMineralItem, 1));
+		level.addFreshEntity(mineralItemEntity);
 		
 		if (ConfigHandler.sendMessageOnMineralFind) {
-			MessageFunctions.sendMessage(player, ConfigHandler.foundMineralMessage, ChatFormatting.DARK_GREEN);
+			if (((ServerPlayer)player).connection != null) {
+				MessageFunctions.sendMessage(player, ConfigHandler.foundMineralMessage, ChatFormatting.DARK_GREEN);
+			}
 		}
 	}
 }
