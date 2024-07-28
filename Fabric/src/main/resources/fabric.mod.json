@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "mineralchance",
-  "version": "3.6",
+  "version": "3.7",
 
   "name": "Mineral Chance",
   "description": "Adds a chance to find a random mineral inside a stone block when mining.",
@@ -23,7 +23,7 @@
     "fabric": "*",
     "minecraft": ">=1.21",
     "java": ">=21",
-    "collective": ">=7.61"
+    "collective": ">=7.78"
   },
 
   "custom": {
@@ -44,11 +44,9 @@
 	  " Alister",
 	  " Andrean Olgo",
 	  " aternosorg",
-	  " BirdieMiner",
 	  " Cherriesaurus",
-	  " Jeremy Langford",
 	  " Michael W. S.",
-	  " Rare Students",
+	  " Nahuel Fernandez",
 	  " Shana Gitnick",
 	  " Tyler Behl"
   ]
