@@ -61,7 +61,7 @@ public class Util {
 			Set<Item> customMineralsResult = new HashSet<>();
 
 			for (String customMineralTag : customMinerals) {
-				String[] customMineral = customMineralTag.split(":");
+				String[] customMineral = customMineralTag.trim().split(":");
 
 				if (customMineral.length != 2) {
 					continue;
