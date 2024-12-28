@@ -18,6 +18,8 @@ public class ConfigHandler extends DuskConfig {
 	@Entry public static boolean sendMessageOnMineralFind = true;
 	@Entry public static String foundMineralMessage = "You've found a mineral hidden in the block!";
 	@Entry public static boolean ignoreFakePlayers = true;
+	@Entry public static String customOverworldMinerals = "";
+	@Entry public static String customNetherMinerals = "";
 
 	public static void initConfig() {
 		configMetaData.put("extraMineralChanceOnOverworldStoneBreak", Arrays.asList(
@@ -43,6 +45,12 @@ public class ConfigHandler extends DuskConfig {
 		));
 		configMetaData.put("ignoreFakePlayers", Arrays.asList(
 			"If enabled, minerals won't be dropped if the player is a fake. For example when a mod breaks a block as a simulated player."
+		));
+		configMetaData.put("customOverworldMinerals", Arrays.asList(
+				"Custom list of overworld minerals. Example: minecraft:diamond,modId:itemId"
+		));
+		configMetaData.put("customNetherMinerals", Arrays.asList(
+				"Custom list of nether minerals. Example: minecraft:diamond,modId:itemId"
 		));
 
 		DuskConfig.init(Reference.NAME, Reference.MOD_ID, ConfigHandler.class);
